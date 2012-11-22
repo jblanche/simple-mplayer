@@ -1,14 +1,11 @@
 var Sound = require('../index.js');
 
-// fire and forget:
-//new Sound('./trumpet.wav').play();
-
-// with ability to pause/resume:
+// with ability to pause/resume/stop:
 var music = new Sound('./trumpet.wav');
-music.play({loop: 0});
+music.play({loop: 0}); // send "-loop 0" to MPlayer to loop the soundtrack forever
 
 setTimeout(function () {
-    music.pause(); // pause the music after five seconds
+    music.pause(); // pause the music after one seconds
 }, 1000);
 
 setTimeout(function () {
@@ -16,5 +13,5 @@ setTimeout(function () {
 }, 3000);
 
 setTimeout(function () {
-    music.stop(); // and resume it two seconds after pausing
-}, 6000);
+    music.stop(); // and stop definitely seven seconds after resuming
+}, 10000);
