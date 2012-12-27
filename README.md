@@ -7,10 +7,10 @@ Simple MPlayer wrapper for node
 ## Usage
 
 ``` js
-var Sound = require('simple-mplayer');
+var Media = require('simple-mplayer');
 
 // with ability to pause/resume/stop:
-var music = new Sound('./trumpet.wav');
+var music = new Media('./trumpet.wav');
 music.play({loop: 0}); // send "-loop 0" to MPlayer to loop the soundtrack forever
 
 setTimeout(function () {
