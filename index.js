@@ -8,7 +8,7 @@
  * MIT License
  */
 
-var spawn = require('child_process').spawn,
+var exec = require('child_process').exec,
     events = require('events'),
     util = require('util');
 
@@ -21,14 +21,20 @@ util.inherits(module.exports, events.EventEmitter);
 
 module.exports.prototype.play = function (options) {
     this.stopped = false;
-    var args = [this.filename];
+    var args = [this.filename]
+      , argsString = '';
 
     for(var prop in options) {
         if(options.hasOwnProperty(prop)){
             args.unshift('-'+prop, options[prop] );
         }
     }
-    this.process = spawn('mplayer', args);
+
+    args.forEach(function ( arg ) {
+        argsString += ' ' + arg;
+    });
+
+    this.process = exec('mplayer' + argsString, {encoding: 'binary', maxBuffer: 5000*1024});
     this.process.on('exit', function (code, sig) {
         if (code !== null && sig === null) {
             this.emit('complete');
